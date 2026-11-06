@@ -1,1 +1,339 @@
-test
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OctoTriage — Triage every GitHub PR and issue in one place</title>
+  <meta
+    name="description"
+    content="OctoTriage turns scattered GitHub notifications into one fast, focused triage board across all your repositories."
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="https://logic-hq.github.io/octo-triage/" class="flex items-center gap-2 font-semibold tracking-tight">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-emerald-500 text-slate-950">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 256 256">
+                <path d="M0 0h256v256H0z" fill="none" />
+                <g fill="currentColor">
+                    <path
+                        d="M232 116a60 60 0 0 1-60 60h-12v40H96v-80H84a60 60 0 0 1-60-60a20 20 0 0 1 20-20a20 20 0 0 1 20 20a20 20 0 0 0 20 20h12V56a32 32 0 0 1 32-32a32 32 0 0 1 32 32v80h12a20 20 0 0 0 20-20a20 20 0 0 1 20-20a20 20 0 0 1 20 20"
+                        opacity=".2" />
+                    <path
+                        d="M216 208h-48v-24h4a68.07 68.07 0 0 0 68-68a28 28 0 0 0-56 0a12 12 0 0 1-12 12h-4V56a40 40 0 0 0-80 0v32h-4a12 12 0 0 1-12-12a28 28 0 0 0-56 0a68.07 68.07 0 0 0 68 68h4v64H40a8 8 0 0 0 0 16h176a8 8 0 0 0 0-16M96 128H84a52.06 52.06 0 0 1-52-52a12 12 0 0 1 24 0a28 28 0 0 0 28 28h12a8 8 0 0 0 8-8V56a24 24 0 0 1 48 0v80a8 8 0 0 0 8 8h12a28 28 0 0 0 28-28a12 12 0 0 1 24 0a52.06 52.06 0 0 1-52 52h-12a8 8 0 0 0-8 8v32h-48v-72a8 8 0 0 0-8-8" />
+                </g>
+            </svg>
+        </span>
+        OctoTriage
+      </a>
+      <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+        <a href="#features" class="hover:text-white">Features</a>
+        <a href="#how-it-works" class="hover:text-white">How it works</a>
+        <a href="#privacy" class="hover:text-white">Privacy</a>
+        <a href="#get-started" class="hover:text-white">Get started</a>
+      </nav>
+      <a
+        href="https://github.com/Logic-HQ/OctoTriage"
+        class="rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+      >
+        Connect GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(16,185,129,0.18),transparent)]"></div>
+    <div class="relative mx-auto max-w-6xl px-6 pb-20 pt-20 text-center md:pt-28">
+      <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300">
+        Built for open-source maintainers
+      </span>
+
+      <h1 class="mx-auto mt-6 max-w-4xl text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+        Master your GitHub workflow.
+        <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+          Start triaging with clarity.
+        </span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-300">
+        OctoTriage brings open issues and pull requests from all your repositories into one
+        high-priority board—so you always know what needs your attention right now.
+      </p>
+
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="#get-started"
+          class="w-full rounded-full bg-emerald-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400 sm:w-auto"
+        >
+          Connect your repositories
+        </a>
+        <a
+          href="#features"
+          class="w-full rounded-full border border-white/15 px-8 py-4 text-base font-semibold text-white transition hover:bg-white/5 sm:w-auto"
+        >
+          See how it works
+        </a>
+      </div>
+
+      <p class="mt-4 text-sm text-slate-400">
+        100% client-side • GitHub OAuth • No server-side data storage
+      </p>
+
+      <!-- Product preview -->
+      <div class="mx-auto mt-16 max-w-5xl rounded-2xl border border-white/10 bg-slate-900/70 p-4 shadow-2xl">
+        <div class="rounded-xl bg-slate-950 p-5 text-left">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div>
+              <p class="text-sm font-semibold text-white">Triage Board</p>
+              <p class="text-xs text-slate-400">12 repositories • 38 open items • updated 2 minutes ago</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">Needs review</span>
+              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">Stale</span>
+              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">First-time contributor</span>
+            </div>
+          </div>
+
+          <div class="mt-5 grid gap-4 md:grid-cols-4">
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Incoming</p>
+              <p class="mt-3 text-2xl font-bold">14</p>
+              <p class="mt-1 text-xs text-slate-400">Unassigned issues and PRs</p>
+            </div>
+            <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wide text-emerald-300">Needs review</p>
+              <p class="mt-3 text-2xl font-bold">9</p>
+              <p class="mt-1 text-xs text-slate-400">Ready for maintainer action</p>
+            </div>
+            <div class="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wide text-amber-300">Stale</p>
+              <p class="mt-3 text-2xl font-bold">11</p>
+              <p class="mt-1 text-xs text-slate-400">No activity for 7+ days</p>
+            </div>
+            <div class="rounded-xl border border-rose-500/20 bg-rose-500/10 p-4">
+              <p class="text-xs font-semibold uppercase tracking-wide text-rose-300">Blocked</p>
+              <p class="mt-3 text-2xl font-bold">4</p>
+              <p class="mt-1 text-xs text-slate-400">Waiting on author or dependency</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="border-t border-white/10 bg-slate-950 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Everything you need to clear the queue</h2>
+        <p class="mt-4 text-slate-300">
+          OctoTriage is designed around one question: <em>What needs my review right now across all my repos?</em>
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+	<path d="M0 0h24v24H0z" fill="none" />
+	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+		<g stroke-dasharray="24">
+			<path d="M11.5 5c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
+				<animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="24;0" />
+			</path>
+			<path stroke-dashoffset="24" d="M11.5 12c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
+				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" to="0" />
+			</path>
+			<path stroke-dashoffset="24" d="M11.5 19c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
+				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.3s" to="0" />
+			</path>
+		</g>
+		<g stroke-dasharray="12" stroke-dashoffset="12" stroke-width="2">
+			<path d="M3 5l2 2l4 -4">
+				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" to="0" />
+			</path>
+			<path d="M3 12l2 2l4 -4">
+				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" to="0" />
+			</path>
+			<path d="M3 19l2 2l4 -4">
+				<animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" to="0" />
+			</path>
+		</g>
+	</g>
+</svg>
+        </div>
+          <h3 class="mt-5 text-lg font-semibold">Multi-repo aggregation</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Pull issues and pull requests from every repository you maintain into a single unified inbox.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">⌘</div>
+          <h3 class="mt-5 text-lg font-semibold">Smart prioritization</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Sort by waiting-on-review status, stale activity, labels, and first-time contributors—not just chronology.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">✓</div>
+          <h3 class="mt-5 text-lg font-semibold">One-click actions</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Merge, close, request changes, or apply labels directly from the board with keyboard-friendly quick actions.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">◎</div>
+          <h3 class="mt-5 text-lg font-semibold">Kanban triage view</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Organize work into Incoming, Needs Review, Stale, and Action Blocked columns.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">↻</div>
+          <h3 class="mt-5 text-lg font-semibold">Fast and cached</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            GraphQL-backed bulk fetching and local caching keep the dashboard responsive while respecting API limits.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+	<path d="M0 0h16v16H0z" fill="none" />
+	<g fill="currentColor">
+		<path d="M5.338 1.59a61 61 0 0 0-2.837.856a.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025a1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453a7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625a11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43A63 63 0 0 1 5.072.56" />
+		<path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415" />
+	</g>
+</svg>
+
+          </div>
+          <h3 class="mt-5 text-lg font-semibold">Privacy-first design</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Your GitHub access token stays in your browser session; repository data is cached locally on your device.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="border-t border-white/10 bg-slate-900/40 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="grid gap-12 md:grid-cols-2 md:items-center">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight md:text-4xl">From notification noise to a clear queue</h2>
+          <p class="mt-4 text-slate-300">
+            Connect GitHub once, choose the repositories you maintain, and OctoTriage turns the backlog into an actionable board.
+          </p>
+
+          <ol class="mt-8 space-y-6">
+            <li class="flex gap-4">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-500 text-sm font-bold text-slate-950">1</span>
+              <div>
+                <p class="font-semibold">Connect securely</p>
+                <p class="mt-1 text-sm text-slate-300">Sign in with GitHub OAuth. Tokens remain in browser memory or secure storage.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-500 text-sm font-bold text-slate-950">2</span>
+              <div>
+                <p class="font-semibold">Select repositories</p>
+                <p class="mt-1 text-sm text-slate-300">Add the projects you maintain and control exactly what appears on your board.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-500 text-sm font-bold text-slate-950">3</span>
+              <div>
+                <p class="font-semibold">Triage in one place</p>
+                <p class="mt-1 text-sm text-slate-300">Filter, prioritize, label, review, and act—without hopping between repository pages.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-slate-950 p-6">
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Example workflow</p>
+          <div class="mt-5 space-y-3">
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <p class="text-sm font-semibold">PR #482 · Add retry logic to webhook handler</p>
+              <p class="mt-1 text-xs text-slate-400">Needs review · First-time contributor · Updated 12 minutes ago</p>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <p class="text-sm font-semibold">Issue #137 · Docs: installation fails on Windows</p>
+              <p class="mt-1 text-xs text-slate-400">Stale · No activity for 9 days</p>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <p class="text-sm font-semibold">PR #519 · Refactor repository selector</p>
+              <p class="mt-1 text-xs text-slate-400">Changes requested · Waiting on author</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section id="privacy" class="border-t border-white/10 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 md:p-12">
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Your repositories stay yours</h2>
+        <p class="mt-4 max-w-3xl text-slate-300">
+          OctoTriage is a lightweight client-side application. It uses GitHub OAuth, fetches only the repository data you select, and keeps local state in your browser—not on a centralized backend.
+        </p>
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-5">
+            <p class="font-semibold">Minimal access</p>
+            <p class="mt-2 text-sm text-slate-300">Requests only the GitHub permissions needed to read and triage your selected repositories.</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-5">
+            <p class="font-semibold">Local caching</p>
+            <p class="mt-2 text-sm text-slate-300">Uses browser storage to improve speed and support offline access to cached board state.</p>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-5">
+            <p class="font-semibold">No data resale</p>
+            <p class="mt-2 text-sm text-slate-300">No third-party analytics or repository-data marketplace—just a focused maintainer tool.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="get-started" class="border-t border-white/10 bg-slate-900/40 py-20">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <h2 class="text-3xl font-bold tracking-tight md:text-5xl">Clear your maintainer backlog today</h2>
+      <p class="mx-auto mt-4 max-w-xl text-slate-300">
+        Turn a scattered stream of GitHub activity into a focused, actionable triage board.
+      </p>
+      <a
+        href="https://github.com/Logic-HQ/OctoTriage"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400"
+      >
+        Connect GitHub and start triaging
+      </a>
+      <p class="mt-4 text-sm text-slate-400">Free for open-source maintainers.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-10">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-400 md:flex-row">
+      <p>© 2026 OctoTriage. Built for open-source maintainers.</p>
+      <div class="flex gap-6">
+        <a href="https://github.com/Logic-HQ/OctoTriage" class="hover:text-white">GitHub</a>
+        <a href="https://github.com/Logic-HQ/OctoTriage/wiki" class="hover:text-white">Documentation</a>
+        <a href="https://logic-hq.github.io/octo-triage/#privacy" class="hover:text-white">Privacy</a>
+        <a href="https://github.com/Logic-HQ/OctoTriage/discussions" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
