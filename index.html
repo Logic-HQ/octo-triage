@@ -1,16 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OctoTriage — Triage every GitHub PR and issue in one place</title>
-  <meta
-    name="description"
-    content="OctoTriage turns scattered GitHub notifications into one fast, focused triage board across all your repositories."
-  />
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M0 0h256v256H0z' fill='none' /%3E%3Cg fill='%23333333'%3E%3Cpath d='M232 116a60 60 0 0 1-60 60h-12v40H96v-80H84a60 60 0 0 1-60-60a20 20 0 0 1 20-20a20 20 0 0 1 20 20a20 20 0 0 0 20 20h12V56a32 32 0 0 1 32-32a32 32 0 0 1 32 32v80h12a20 20 0 0 0 20-20a20 20 0 0 1 20-20a20 20 0 0 1 20 20' opacity='.2' /%3E%3Cpath d='M216 208h-48v-24h4a68.07 68.07 0 0 0 68-68a28 28 0 0 0-56 0a12 12 0 0 1-12 12h-4V56a40 40 0 0 0-80 0v32h-4a12 12 0 0 1-12-12a28 28 0 0 0-56 0a68.07 68.07 0 0 0 68 68h4v64H40a8 8 0 0 0 0 16h176a8 8 0 0 0 0-16M96 128H84a52.06 52.06 0 0 1-52-52a12 12 0 0 1 24 0a28 28 0 0 0 28 28h12a8 8 0 0 0 8-8V56a24 24 0 0 1 48 0v80a8 8 0 0 0 8 8h12a28 28 0 0 0 28-28a12 12 0 0 1 24 0a52.06 52.06 0 0 1-52 52h-12a8 8 0 0 0-8 8v32h-48v-72a8 8 0 0 0-8-8' /%3E%3C/g%3E%3C/svg%3E">
-  <script src="https://cdn.tailwindcss.com"></script>
-	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="OctoTriage — a community-built triage board for GitHub maintainers. Open source, client-side, and free for maintainers.">
+    <meta name="color-scheme" content="dark light">
+    <title>OctoTriage — A little less noise. A little more maintaining.</title>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('octo-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') } catch (e) { }</script>
+<link href="/public/img/octotriage-logo.svg" rel="icon" sizes="128x128">
+<link rel="stylesheet" href="/public/style.css">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDVJY9ZCML"></script>
 <script>
@@ -20,374 +21,729 @@
 
   gtag('config', 'G-NDVJY9ZCML');
 </script>
-	
+
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased">
-  <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-      <a href="https://logic-hq.github.io/octo-triage/" class="flex items-center gap-2 font-semibold tracking-tight">
-        <span class="grid h-8 w-8 place-items-center rounded-lg bg-emerald-500 text-slate-950">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 256 256">
-                <path d="M0 0h256v256H0z" fill="none" />
-                <g fill="currentColor">
-                    <path
-                        d="M232 116a60 60 0 0 1-60 60h-12v40H96v-80H84a60 60 0 0 1-60-60a20 20 0 0 1 20-20a20 20 0 0 1 20 20a20 20 0 0 0 20 20h12V56a32 32 0 0 1 32-32a32 32 0 0 1 32 32v80h12a20 20 0 0 0 20-20a20 20 0 0 1 20-20a20 20 0 0 1 20 20"
-                        opacity=".2" />
-                    <path
-                        d="M216 208h-48v-24h4a68.07 68.07 0 0 0 68-68a28 28 0 0 0-56 0a12 12 0 0 1-12 12h-4V56a40 40 0 0 0-80 0v32h-4a12 12 0 0 1-12-12a28 28 0 0 0-56 0a68.07 68.07 0 0 0 68 68h4v64H40a8 8 0 0 0 0 16h176a8 8 0 0 0 0-16M96 128H84a52.06 52.06 0 0 1-52-52a12 12 0 0 1 24 0a28 28 0 0 0 28 28h12a8 8 0 0 0 8-8V56a24 24 0 0 1 48 0v80a8 8 0 0 0 8 8h12a28 28 0 0 0 28-28a12 12 0 0 1 24 0a52.06 52.06 0 0 1-52 52h-12a8 8 0 0 0-8 8v32h-48v-72a8 8 0 0 0-8-8" />
-                </g>
-            </svg>
-        </span>
-        OctoTriage
-      </a>
-      <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
-        <a href="#features" class="hover:text-white">Features</a>
-        <a href="#how-it-works" class="hover:text-white">How it works</a>
-        <a href="#privacy" class="hover:text-white">Privacy</a>
-        <a href="#get-started" class="hover:text-white">Get started</a>
-      </nav>
-      <a
-        href="https://github.com/Logic-HQ/OctoTriage"
-        class="rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
-      >
-        Connect GitHub
-      </a>
-    </div>
-  </header>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(16,185,129,0.18),transparent)]"></div>
-    <div class="relative mx-auto max-w-6xl px-6 pb-20 pt-20 text-center md:pt-28">
-      <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300">
-        Built for open-source maintainers
-      </span>
-
-      <h1 class="mx-auto mt-6 max-w-4xl text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-        Master your GitHub workflow.
-        <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
-          Start triaging with clarity.
-        </span>
-      </h1>
-
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-300">
-        OctoTriage brings open issues and pull requests from all your repositories into one
-        high-priority board—so you always know what needs your attention right now.
-      </p>
-
-      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href="#get-started"
-          class="w-full rounded-full bg-emerald-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400 sm:w-auto"
-        >
-          Connect your repositories
-        </a>
-        <a
-          href="#features"
-          class="w-full rounded-full border border-white/15 px-8 py-4 text-base font-semibold text-white transition hover:bg-white/5 sm:w-auto"
-        >
-          See how it works
-        </a>
-      </div>
-
-      <p class="mt-4 text-sm text-slate-400">
-        100% client-side • GitHub OAuth • No server-side data storage
-      </p>
-
-		
-      <div style="
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header>
+        <nav class="wrap nav" aria-label="Main navigation">
+            <a class="brand" href="https://logic-hq.github.io/octo-triage/">
+                    <img src="/public/img/octotriage-logo.svg" alt="octoTriage">
+                    <span class="wordmark">octoTriage<span style="color:var(--accent)">.</span></span></a>
+            <div class="navlinks">
+                <a href="#features" class="hover:text-white">Features</a>
+                <a href="#how-it-works" class="hover:text-white">How it works</a>
+                <a href="#privacy">Privacy</a><a href="#contribute">Contribute</a>
+            </div>
+            <div class="nav-actions"><button class="icon-btn" id="theme" aria-label="Switch color theme"
+                    title="Switch color theme"><span id="theme-icon" aria-hidden="true">◐</span></button>
+                    <a class="btn small" data-repo href="https://github.com/Logic-HQ/OctoTriage/">
+                        <svg class="gh" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path
+                            d="M12 .8a11.3 11.3 0 0 0-3.6 22c.6.1.8-.2.8-.5v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.6-1.3-1.6-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.4-1.3-5.4-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.2-3.1 0 0 1-.3 3.1 1.2a10.7 10.7 0 0 1 5.7 0C17 4.9 18 5.2 18 5.2c.7 1.6.3 2.8.2 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.8 5.4-5.4 5.7.4.4.8 1 .8 2.1v3.1c0 .3.2.6.8.5A11.3 11.3 0 0 0 12 .8Z" />
+                    </svg>View on GitHub <span aria-hidden="true">↗</span>
+                </a></div>
+        </nav>
+    </header>
+    <main id="main"> 
+      
+        <section class="hero">
+              <div class="decor-spot inset-0 bg-radial-gradient z-id-2">
+            <div class="wrap z-id-200">
+                <div class="hero-grid">
+                    <div>
+                        <div class="eyebrow">Built for open-source maintainers</div>
+                        <h1 class="fwh-100">octoTriage<br>
+                            <span class="fwh-800 ">
+                                <span class="uppercase">Master</span>
+                                your <br>GitHub workflow
+                            </span>
+                        </h1>
+                        <p class="intro">
+                            with the smart orchestrator <br>that takes care of routine or tedious tasks.
+                        </p>
+                        <div class="actions">
+                            <a class="btn primary" href="#features">Explore the features
+                                <span aria-hidden="true">↓</span>
+                            </a>
+                            <a class="btn" href="#contribute">Build with us
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                        <div class="hero-note mono">Open source. Client-side. Free for maintainers.</div>
+                    </div>
+                    <div class="art" aria-hidden="true">
+                      
+                      <div style="
     position: absolute;
-    margin-top: -11rem;
-    margin-left: -4rem;
+    margin-top: 9rem;
+    margin-left: -34rem;
     z-index: -20;
     rotate: -15deg; 
 ">
 
  <svg xmlns="http://www.w3.org/2000/svg" width="12em" height="12em" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M0 0h24v24H0z" fill="none"></path>
             <g fill="none" stroke="#34d3991b" stroke-linecap="round" stroke-linejoin="round">
                 <g stroke-dasharray="24">
-                    <path
-                        d="M11.5 5c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
-                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="24;0" />
+                    <path d="M11.5 5c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
+                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="24;0"></animate>
                     </path>
-                    <path stroke-dashoffset="24"
-                        d="M11.5 12c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
-                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" to="0" />
+                    <path stroke-dashoffset="24" d="M11.5 12c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" to="0"></animate>
                     </path>
-                    <path stroke-dashoffset="24"
-                        d="M11.5 19c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
-                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.3s" to="0" />
+                    <path stroke-dashoffset="24" d="M11.5 19c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.3s" to="0"></animate>
                     </path>
                 </g>
                 <g stroke-dasharray="12" stroke-dashoffset="12" stroke-width="2">
                     <path d="M3 5l2 2l4 -4">
-                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" to="0" />
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" to="0"></animate>
                     </path>
                     <path d="M3 12l2 2l4 -4">
-                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" to="0" />
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" to="0"></animate>
                     </path>
                     <path d="M3 19l2 2l4 -4">
-                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" to="0" />
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" to="0"></animate>
                     </path>
                 </g>
             </g>
         </svg>
 
       </div>
+                            <img src="/public/img/octotriage-logo.svg" alt="octoTriage">
 
-      <!-- Product preview -->
-      <div class="mx-auto mt-16 max-w-5xl rounded-2xl border border-white/10 bg-slate-900/70 p-4 shadow-2xl">
-        <div class="rounded-xl bg-slate-950 p-5 text-left">
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
-            <div>
-              <p class="text-sm font-semibold text-white">Triage Board</p>
-              <p class="text-xs text-slate-400">12 repositories • 38 open items • updated 2 minutes ago</p>
-            </div>
-            <div class="flex gap-2">
-              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">Needs review</span>
-              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">Stale</span>
-              <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">First-time contributor</span>
-            </div>
-          </div>
+                            <span class="label">hello, maintainer.</span></div>
+                </div>
 
-          <div class="mt-5 grid gap-4 md:grid-cols-4">
-            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-              <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Incoming</p>
-              <p class="mt-3 text-2xl font-bold">14</p>
-              <p class="mt-1 text-xs text-slate-400">Unassigned issues and PRs</p>
+
+
+
+
+
+                <div class="traits"><span><i>⌘</i> Built around GitHub</span><span><i>◇</i> Your data stays on your
+                        device</span><span><i>↗</i> Community-shaped, not sales-led</span></div>
             </div>
-            <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4">
-              <p class="text-xs font-semibold uppercase tracking-wide text-emerald-300">Needs review</p>
-              <p class="mt-3 text-2xl font-bold">9</p>
-              <p class="mt-1 text-xs text-slate-400">Ready for maintainer action</p>
             </div>
-            <div class="rounded-xl border border-amber-500/20 bg-amber-500/10 p-4">
-              <p class="text-xs font-semibold uppercase tracking-wide text-amber-300">Stale</p>
-              <p class="mt-3 text-2xl font-bold">11</p>
-              <p class="mt-1 text-xs text-slate-400">No activity for 7+ days</p>
+        </section>
+
+
+        <section class="preview-section wrap">
+
+        
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">How project appears.</div>
+                    <h2> Initially, multi-repo aggregation.</h2>
+                </div>
             </div>
-            <div class="rounded-xl border border-rose-500/20 bg-rose-500/10 p-4">
-              <p class="text-xs font-semibold uppercase tracking-wide text-rose-300">Blocked</p>
-              <p class="mt-3 text-2xl font-bold">4</p>
-              <p class="mt-1 text-xs text-slate-400">Waiting on author or dependency</p>
-            </div>
-          </div>
-        </div>
+        </section>
+
+          <section class="quote-section" aria-label="Maintainer quote">
+
+     <a href="https://logic-hq.github.io/en/profile-sergio" class="meta-link avatar-link">
+    <div class="quote-author">
+        
+                  <img
+        src="https://avatars.githubusercontent.com/u/332618538?v=4&amp;size=64"
+        alt="u/Serg avatar"
+        class="author-avatar"
+      />
+        
+
+      <div class="author-info">
+        <span class="author-name">u/Sergio</span>
+        <span class="author-role meta-date">maintainer</span>
       </div>
     </div>
-  </section>
+</a>
 
-  <!-- Features -->
-  <section id="features" class="border-t border-white/10 bg-slate-950 py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="max-w-2xl">
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Everything you need to clear the queue</h2>
-        <p class="mt-4 text-slate-300">
-          OctoTriage is designed around one question: <em>What needs my review right now across all my repos?</em>
+    <blockquote class="quote-content">
+      <div class="quote-header">
+        <span class="quote-icon" aria-hidden="true">“</span>
+        <p class="quote-lead">
+            It all started with a simple concept sketched out as single-pager: how can we turn the scattered stream of GitHub activity into something actionable?
         </p>
       </div>
-
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-	<path d="M0 0h24v24H0z" fill="none" />
-	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-		<g stroke-dasharray="24">
-			<path d="M11.5 5c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
-				<animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="24;0" />
-			</path>
-			<path stroke-dashoffset="24" d="M11.5 12c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
-				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.3s" to="0" />
-			</path>
-			<path stroke-dashoffset="24" d="M11.5 19c0 -0.83 0.67 -1.5 1.5 -1.5h6c0.83 0 1.5 0.67 1.5 1.5c0 0.83 -0.67 1.5 -1.5 1.5h-6c-0.83 0 -1.5 -0.67 -1.5 -1.5Z">
-				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.3s" to="0" />
-			</path>
-		</g>
-		<g stroke-dasharray="12" stroke-dashoffset="12" stroke-width="2">
-			<path d="M3 5l2 2l4 -4">
-				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" to="0" />
-			</path>
-			<path d="M3 12l2 2l4 -4">
-				<animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" to="0" />
-			</path>
-			<path d="M3 19l2 2l4 -4">
-				<animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" to="0" />
-			</path>
-		</g>
-	</g>
-</svg>
-        </div>
-          <h3 class="mt-5 text-lg font-semibold">Multi-repo aggregation</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Pull issues and pull requests from every repository you maintain into a single unified inbox.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">⌘</div>
-          <h3 class="mt-5 text-lg font-semibold">Smart prioritization</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Sort by waiting-on-review status, stale activity, labels, and first-time contributors—not just chronology.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">✓</div>
-          <h3 class="mt-5 text-lg font-semibold">One-click actions</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Merge, close, request changes, or apply labels directly from the board with keyboard-friendly quick actions.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">◎</div>
-          <h3 class="mt-5 text-lg font-semibold">Kanban triage view</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Organize work into Incoming, Needs Review, Stale, and Action Blocked columns.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">↻</div>
-          <h3 class="mt-5 text-lg font-semibold">Fast and cached</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            GraphQL-backed bulk fetching and local caching keep the dashboard responsive while respecting API limits.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-          <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500/15 text-emerald-300">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
-	<path d="M0 0h16v16H0z" fill="none" />
-	<g fill="currentColor">
-		<path d="M5.338 1.59a61 61 0 0 0-2.837.856a.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025a1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453a7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625a11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43A63 63 0 0 1 5.072.56" />
-		<path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415" />
-	</g>
-</svg>
-
-          </div>
-          <h3 class="mt-5 text-lg font-semibold">Privacy-first design</h3>
-          <p class="mt-2 text-sm text-slate-300">
-            Your GitHub access token stays in your browser session; repository data is cached locally on your device.
-          </p>
-        </div>
+      <div class="quote-footer">
+        <span class="quote-icon" aria-hidden="true">”</span>
       </div>
-    </div>
+    </blockquote>
   </section>
 
-  <!-- How it works -->
-  <section id="how-it-works" class="border-t border-white/10 bg-slate-900/40 py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="grid gap-12 md:grid-cols-2 md:items-center">
+    <section class="preview-section wrap">
+
+
+
+
+        <div class="mx-auto mt-16 max-w-5xl rounded-2xl border-pr-1 border-white/10 bg-slate-900/70 p-4 shadow-2xl">
+            <div class="rounded-xl bg-slate-950-iner p-5 text-left">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white-2 pb-4">
+                <div>
+                <p class="text-sm font-semibold text-white">Triage Board</p>
+                <p class="text-xs text-slate-400">12 repositories • 38 open items • updated 2 minutes ago</p>
+                </div>
+                <div class="flex gap-2">
+                <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">Needs review</span>
+                <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">Stale</span>
+                <span class="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300">First-time contributor</span>
+                </div>
+            </div>
+
+            <div class="mt-5 grid gap-4 md:grid-cols-4">
+                <div class="rounded-xl border-pr-1 border-white/10 bg-white/5 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Incoming</p>
+                <p class="mt-3 text-2xl font-bold">14</p>
+                <p class="mt-1 text-xs text-slate-400">Unassigned issues and PRs</p>
+                </div>
+                <div class="rounded-xl border-pr-1 border-emerald-500/20 bg-emerald-500/10 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-emerald-300">Needs review</p>
+                <p class="mt-3 text-2xl font-bold">9</p>
+                <p class="mt-1 text-xs text-slate-400">Ready for maintainer action</p>
+                </div>
+                <div class="rounded-xl border-pr-1 border-amber-500/20 bg-amber-500/10 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-amber-300">Stale</p>
+                <p class="mt-3 text-2xl font-bold">11</p>
+                <p class="mt-1 text-xs text-slate-400">No activity for 7+ days</p>
+                </div>
+                <div class="rounded-xl border-pr-1 border-rose-500/20 bg-rose-500/10 p-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-rose-300">Blocked</p>
+                <p class="mt-3 text-2xl font-bold">4</p>
+                <p class="mt-1 text-xs text-slate-400">Waiting on author or dependency</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+        <section class="preview-section wrap" id="board" aria-label="Interactive sample triage board">
+
+    <div class="section-head">
         <div>
-          <h2 class="text-3xl font-bold tracking-tight md:text-4xl">From notification noise to a clear queue</h2>
-          <p class="mt-4 text-slate-300">
-            Connect GitHub once, choose the repositories you maintain, and OctoTriage turns the backlog into an actionable board.
-          </p>
-
-          <ol class="mt-8 space-y-6">
-            <li class="flex gap-4">
-              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-500 text-sm font-bold text-slate-950">1</span>
-              <div>
-                <p class="font-semibold">Connect securely</p>
-                <p class="mt-1 text-sm text-slate-300">Sign in with GitHub OAuth. Tokens remain in browser memory or secure storage.</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-500 text-sm font-bold text-slate-950">2</span>
-              <div>
-                <p class="font-semibold">Select repositories</p>
-                <p class="mt-1 text-sm text-slate-300">Add the projects you maintain and control exactly what appears on your board.</p>
-              </div>
-            </li>
-            <li class="flex gap-4">
-              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-emerald-500 text-sm font-bold text-slate-950">3</span>
-              <div>
-                <p class="font-semibold">Triage in one place</p>
-                <p class="mt-1 text-sm text-slate-300">Filter, prioritize, label, review, and act—without hopping between repository pages.</p>
-              </div>
-            </li>
-          </ol>
+            <div class="eyebrow">How it began & Next steps.</div> 
+            <h2> Not just a structured dashboard <br>but Smart-things for tracking.</h2>
         </div>
+    </div>
+            
+            <div class="pb-3 feature">
+                <p class="py-1 ">
+            Next, OctoTriagewas designed around the question: What needs my review right now across all my repos?
+            Here also appeared:
 
-        <div class="rounded-2xl border border-white/10 bg-slate-950 p-6">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Example workflow</p>
-          <div class="mt-5 space-y-3">
-            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-              <p class="text-sm font-semibold">PR #482 · Add retry logic to webhook handler</p>
-              <p class="mt-1 text-xs text-slate-400">Needs review · First-time contributor · Updated 12 minutes ago</p>
+            ·  Privacy-first design
+            ·  Smart prioritization
+            ·  Tagging from the app
+            ·  into a structured dashboard Kanban triage view
+            ·  Fast and cached
+            ·  One-click actions.
+                </p>
             </div>
-            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-              <p class="text-sm font-semibold">Issue #137 · Docs: installation fails on Windows</p>
-              <p class="mt-1 text-xs text-slate-400">Stale · No activity for 9 days</p>
+            <div class="preview">
+                <div class="windowbar">
+                    <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span
+                        class="window-title">octotriage / your workspace</span><span class="demo-label">INTERACTIVE
+                        PREVIEW</span>
+                </div>
+                <div class="boardbar">
+                    <div class="board-heading">Your workflow <small>3 sample repositories · <span
+                                id="total-count">6</span> items shown</small></div>
+                    <div class="filters" role="group" aria-label="Filter sample board"><button class="filter"
+                            data-filter="all" aria-pressed="true">All items</button><button class="filter"
+                            data-filter="issue" aria-pressed="false">Issues</button><button class="filter"
+                            data-filter="pr" aria-pressed="false">Pull requests</button></div>
+                </div>
+                <div class="board">
+                    <div class="column">
+                        <div class="col-head"><span class="status-dot"></span>Incoming <span class="count">2</span>
+                        </div>
+                        <article class="card" data-type="issue">
+                            <div class="repo">acme / ui-kit · #142</div>
+                            <div class="card-title"><span class="issue-icon">◉</span>Button focus ring missing in dark
+                                mode</div>
+                            <div class="tags"><span class="tag">bug</span><span class="tag purple">a11y</span></div>
+                            <div class="card-foot"><span>opened 2h ago</span><span class="avatar">JL</span></div>
+                        </article>
+                        <article class="card" data-type="pr">
+                            <div class="repo">acme / docs · #38</div>
+                            <div class="card-title"><span class="issue-icon">⑂</span>Add local development guide</div>
+                            <div class="tags"><span class="tag">documentation</span></div>
+                            <div class="card-foot"><span>opened 4h ago</span><span class="avatar">MK</span></div>
+                        </article>
+                    </div>
+                    <div class="column ">
+                        <div class="col-head "><span class="status-dot"></span>Needs review <span class="count">2</span>
+                        </div>
+                        <article class="card border-emerald-500/20 bg-emerald-500/10" data-type="pr">
+                            <div class="repo">acme / ui-kit · #139</div>
+                            <div class="card-title"><span class="issue-icon">⑂</span>Respect reduced-motion preferences
+                            </div>
+                            <div class="tags"><span class="tag purple">first-time contributor</span></div>
+                            <div class="card-foot"><span>updated 1h ago</span><span class="avatar">AN</span></div>
+                        </article>
+                        <article class="card border-emerald-500/20 bg-emerald-500/10" data-type="pr">
+                            <div class="repo">acme / core · #86</div>
+                            <div class="card-title"><span class="issue-icon">⑂</span>Handle empty repository responses
+                            </div>
+                            <div class="tags"><span class="tag">ready for review</span></div>
+                            <div class="card-foot"><span>updated 3h ago</span><span class="avatar">TS</span></div>
+                        </article>
+                    </div>
+                    <div class="column ">
+                        <div class="col-head"><span class="status-dot"></span>Stale <span class="count">1</span></div>
+                        <article class="card border-amber-500/20 bg-amber-500/10 " data-type="issue">
+                            <div class="repo">acme / core · #71</div>
+                            <div class="card-title"><span class="issue-icon">◉</span>Unexpected timeout on large
+                                workspaces</div>
+                            <div class="tags"><span class="tag gold">needs reproduction</span></div>
+                            <div class="card-foot"><span>quiet for 9 days</span><span class="avatar">RB</span></div>
+                        </article>
+                    </div>
+                    <div class="column">
+                        <div class="col-head"><span class="status-dot"></span>Blocked <span class="count">1</span></div>
+                        <article class="card border-rose-500/20 bg-rose-500/10" data-type="pr">
+                            <div class="repo">acme / ui-kit · #128</div>
+                            <div class="card-title"><span class="issue-icon">⑂</span>Update shared design tokens</div>
+                            <div class="tags"><span class="tag gold">waiting on author</span></div>
+                            <div class="card-foot"><span>updated 2d ago</span><span class="avatar">EM</span></div>
+                        </article>
+                    </div>
+                </div>
+                <div class="board-footer"><span>◇ Sample data only · no GitHub connection required</span><span>Try the
+                        filters above ↑</span></div>
             </div>
-            <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-              <p class="text-sm font-semibold">PR #519 · Refactor repository selector</p>
-              <p class="mt-1 text-xs text-slate-400">Changes requested · Waiting on author</p>
+            <p class="preview-caption">A look at the workflow, not your live repositories. No sign-in, token, or
+                permissions requested here.</p>
+                
+        </section>
+
+
+
+    <section id="features" class="preview-section wrap">
+
+        
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">Current project status</div>
+                    <h2>Workflow orchestrator.</h2>
+                </div>
             </div>
-          </div>
-        </div>
+        </section>
+
+          <section class="quote-section" aria-label="Maintainer quote">
+
+     <a href="https://logic-hq.github.io/en/profile-sergio" class="meta-link avatar-link">
+    <div class="quote-author">
+        
+                  <img
+        src="https://avatars.githubusercontent.com/u/332618538?v=4&amp;size=64"
+        alt="u/Serg avatar"
+        class="author-avatar"
+      />
+        
+
+      <div class="author-info">
+        <span class="author-name">u/Sergio</span>
+        <span class="author-role meta-date">maintainer</span>
       </div>
     </div>
-  </section>
+</a>
 
-  <!-- Privacy -->
-  <section id="privacy" class="border-t border-white/10 py-20">
-    <div class="mx-auto max-w-6xl px-6">
-      <div class="rounded-3xl border border-emerald-500/20 bg-emerald-500/5 p-8 md:p-12">
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Your repositories stay yours</h2>
-        <p class="mt-4 max-w-3xl text-slate-300">
-          OctoTriage is a lightweight client-side application. It uses GitHub OAuth, fetches only the repository data you select, and keeps local state in your browser—not on a centralized backend.
+    <blockquote class="quote-content">
+      <div class="quote-header">
+        <span class="quote-icon" aria-hidden="true">“</span>
+        <p class="quote-lead">
+            OctoTriage is nearing its first release! Our goal is to create a system that feels less like static data and more like a dynamic workspace, deeply woven into the GitHub workflow for cross-repo task management. To achieve this, we’ve built an automated feedback loop using GitHub Actions. 
         </p>
-        <div class="mt-8 grid gap-4 md:grid-cols-3">
-          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-5">
-            <p class="font-semibold">Minimal access</p>
-            <p class="mt-2 text-sm text-slate-300">Requests only the GitHub permissions needed to read and triage your selected repositories.</p>
-          </div>
-          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-5">
-            <p class="font-semibold">Local caching</p>
-            <p class="mt-2 text-sm text-slate-300">Uses browser storage to improve speed and support offline access to cached board state.</p>
-          </div>
-          <div class="rounded-xl border border-white/10 bg-slate-950/60 p-5">
-            <p class="font-semibold">No data resale</p>
-            <p class="mt-2 text-sm text-slate-300">No third-party analytics or repository-data marketplace—just a focused maintainer tool.</p>
-          </div>
+      </div>
+
+
+
+
+
+      <div class="quote-footer">
+        <span class="quote-icon" aria-hidden="true">”</span>
+      </div>
+    </blockquote>
+
+
+
+     <a href="https://github.com/ValentinaTech" class="meta-link avatar-link">
+    <div class="quote-author">
+        
+                  <img
+        src="https://avatars.githubusercontent.com/u/154520693?v=4&amp;size=64"
+        alt="u/Serg avatar"
+        class="author-avatar"
+      />
+        
+
+      <div class="author-info">
+        <span class="author-name">u/Valentina</span>
+        <span class="author-role meta-date">maintainer</span>
+      </div>
+    </div>
+</a>
+
+    <blockquote class="quote-content">
+      <div class="quote-header">
+        <span class="quote-icon" aria-hidden="true">“</span>
+        <p class="quote-lead">
+            
+        </p>
+      </div>
+
+      <div class="quote-footer">
+        <span class="quote-icon" aria-hidden="true">”</span>
+      </div>
+    </blockquote>
+
+  </section>
+
+
+
+
+
+        <section class="section" id="how-it-works">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="eyebrow">Less tab-hopping. More context.</div>
+                        <h2>Our backlog.<br>With a little perspective.</h2>
+                    </div>
+                    <p>Whether you look after 5 repos or 200, the idea is the same: put the next useful action in front
+                        of you.</p>
+                </div>
+                <div class="features">
+                    <article class="feature">
+                        <div class="feature-number">01 / GATHER</div>
+                        <h3>One place to catch up.</h3>
+                        <p>Bring open issues and pull requests from your selected repositories into a shared view. Four
+                            columns keep incoming work, reviews, stale threads, and blockers separate.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-number">02 / MAKE SENSE OF IT</div>
+                        <h3>Not just newest first.</h3>
+                        <p>Use status, labels, and contribution history to find what needs a human. Spot a first
+                            contribution, an overdue review, or a thread that's gone quiet for 7+ days.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-number">03 / KEEP THINGS MOVING</div>
+                        <h3>Less navigation. More action.</h3>
+                        <p>The project’s action workflow brings labeling, closing, merging, and review requests closer
+                            to the board, with keyboard-friendly controls. Available actions depend on your GitHub
+                            permissions.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="privacy">
+            <div class="wrap privacy">
+                <div>
+                    <div class="eyebrow">Alongside GitHub, not in the middle</div>
+                    <h2>Your GitHub<br>stay yours.</h2>
+                    <p>OctoTriage is designed to talk to GitHub through its official GraphQL API, with bulk fetching
+                        that works within GitHub’s rate limits.</p>
+                    <p>The architecture keeps your access token in your browser session and caches repository data on
+                        your device. No centralized application backend storing your tokens or code.</p>
+                    <p>Access should stay scoped to the repositories you select and the actions you use. Read-only
+                        triage and write actions need different permissions—check the project’s setup guidance before
+                        connecting.</p>
+                    <div class="privacy-note">No third-party analytics. No repository-data marketplace.</div>
+                </div>
+                <div class="architecture"
+                    aria-label="Architecture: your browser connects directly to the GitHub API, with token and cache stored locally">
+                    <div class="arch-head"><span>THE SHORT VERSION</span><span>local-first / inspectable</span></div>
+                    <div class="arch-row">
+                        <div class="node">Your browser<small>OctoTriage</small></div><span class="arrow"
+                            aria-hidden="true">⇄</span>
+                        <div class="node">GitHub<small>GraphQL API</small></div>
+                    </div>
+                    <div class="arch-local">On your device<br><br>session token · local repository cache</div>
+                    <p class="muted" style="font-size:11px;margin-top:18px">Local-first doesn’t mean offline-only:
+                        fetching repositories and making changes still communicates with GitHub.</p>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="contribute">
+            <div class="wrap">
+                <div class="community">
+                    <div class="community-top">
+                        <div>
+                            <div class="eyebrow">Made better together</div>
+                            <h2>A fellow maintainer.</h2>
+                            <p>You don’t need a big pull request to belong here. Bring an opinion, a confusing edge
+                                case, a docs fix—or that one workflow you wish existed.</p>
+                        </div><span class="open-label">＋ room for your first PR</span>
+                    </div>
+                    <div class="contributions">
+                        <article class="contribution">
+                            <h3>Help shape what’s next.</h3>
+                            <p>Tell us what slows down your triage. Help turn maintainer frustrations into a roadmap
+                                worth building.</p><a class="textlink" data-issues href="#project-links">Talk through an
+                                idea ↗</a>
+                        </article>
+                        <article class="contribution">
+                            <h3>Make a small improvement.</h3>
+                            <p>UI polish, sorting logic, clearer documentation. Small, thoughtful changes are a good
+                                place to start.</p><a class="textlink" data-contributing href="#project-links">Find your
+                                way into the code ↗</a>
+                        </article>
+                        <article class="contribution">
+                            <h3>Kick the privacy tires.</h3>
+                            <p>Look at token handling, permissions, and local caching. Help us make the privacy claims
+                                easy to verify.</p><a class="textlink" data-repo href="#project-links">Look under the
+                                hood ↗</a>
+                        </article>
+                    </div>
+                    <div class="community-bottom"><span>Use it. Break it. Question it. Help make it better.</span><a
+                            data-repo href="#project-links">Explore the repository ↗</a></div>
+                </div>
+            </div>
+        </section>
+
+
+  <section class="ticker" aria-label="Technologies used in this project">
+    <div class="ticker__track">
+    <ul class="ticker__group">
+        <li class="ticker__item"><img class="ticker_featured__img" src="/public/img/GitHub_Lockup_White_Clearspace.svg" alt="GitHub logo"></li>
+        <li class="ticker__item"><img class="ticker_featured__img" src="/public/img/GitHub_Copilot_Lockup_White_Clearspace.svg" alt="GitHub Copilot logo"></li>
+        <li class="ticker__item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 256 256">
+                <path d="M0 0h256v256H0z" fill="none" />
+                <path fill="#4a7ebf"
+                    d="M53.604 0c29.604 0 53.604 23.992 53.604 53.59c0 29.09-23.189 52.75-52.093 53.553c0 2.461.109 7.111 1.501 9.92c1.933 3.893 13.525 11.144 24.892 11.144h4.084c2.567-18.271 18.257-32.332 37.24-32.332c18.906 0 34.55 13.946 37.211 32.11h21.13c2.661-18.164 18.304-32.11 37.21-32.11c20.775 0 37.617 16.837 37.617 37.607s-16.842 37.606-37.617 37.606c-18.906 0-34.55-13.948-37.21-32.11h-21.129c-2.66 18.162-18.305 32.11-37.212 32.11c-18.87 0-34.494-13.893-37.199-32.007l-4.515.135c-7.435-.056-15.29-2.042-21.598-6.328c-1.72-1.169-3.415-2.397-5.182-3.56v2.441c-.01.79-.153 12.657-.164 25.833v2.79c.005 8.641.073 17.545.277 24.04c.446 14.246 12.034 25.745 24.822 28.436c1.663.35 4.52.394 6.321.238c2.571-18.264 18.26-32.32 37.238-32.32c20.774 0 37.616 16.838 37.616 37.607c0 20.77-16.842 37.607-37.616 37.607c-18.769 0-34.323-13.744-37.153-31.714h-3.254c-24.436-1.334-39.628-23.746-39.363-41.923c.334-22.877.082-45.764.079-68.646v-7.565C18.546 101.286 0 79.606 0 53.591C0 23.992 23.999 0 53.604 0m69.228 191.78c-14.701 0-26.62 11.915-26.62 26.613s11.919 26.614 26.62 26.614s26.62-11.915 26.62-26.614c0-14.698-11.918-26.614-26.62-26.614m0-84.912c-14.701 0-26.62 11.915-26.62 26.614c0 14.697 11.919 26.613 26.62 26.613s26.62-11.916 26.62-26.613c0-14.699-11.918-26.614-26.62-26.614m95.551 0c-14.702 0-26.62 11.915-26.62 26.614c0 14.697 11.918 26.613 26.62 26.613s26.621-11.916 26.621-26.613c0-14.699-11.918-26.614-26.62-26.614m15.161 15.408a5.496 5.496 0 0 1 .17 7.606l-.16.168l-16.31 16.345a5.5 5.5 0 0 1-7.576.198l-.172-.163l-7.985-7.86a5.496 5.496 0 0 1-.06-7.773a5.5 5.5 0 0 1 7.606-.22l.168.16l4.092 4.027l12.452-12.477a5.5 5.5 0 0 1 7.775-.01m-95.99-.08a5.497 5.497 0 0 1 .17 7.606l-.16.168l-16.31 16.344a5.5 5.5 0 0 1-7.576.198l-.172-.163l-7.985-7.86a5.498 5.498 0 0 1 7.546-7.992l.168.16l4.093 4.027l12.451-12.478a5.5 5.5 0 0 1 7.775-.01M53.604 10.993c-23.532 0-42.608 19.07-42.608 42.598c0 23.525 19.076 42.597 42.608 42.597s42.608-19.072 42.608-42.597c0-23.527-19.076-42.598-42.608-42.598M49.171 28.13A744 744 0 0 1 75.7 44.841c7.308 4.82 7.29 13.563-.1 18.394a609 609 0 0 1-27.058 16.712c-7.455 4.34-15.8-.65-16.002-9.344c-.13-5.602-.024-11.21-.032-16.817c-.006-5.454-.113-10.911.019-16.363c.222-9.248 8.736-14.066 16.643-9.293m-5.91 8.872v3.868l-.001 5.674l-.001 3.71v5.482c0 4.23.002 8.394.01 12.557c.003 1.96 1.023 1.88 2.343 1.063q11.408-7.071 22.827-14.127c1.258-.776 1.294-1.587.06-2.365c-8.154-5.139-16.318-10.26-25.238-15.862" />
+                <path fill="#85b3df"
+                    d="M133.227 223.88a5.497 5.497 0 1 0 .001-10.996a5.497 5.497 0 0 0 0 10.995m-21.049.001a5.497 5.497 0 1 0 0-10.996a5.497 5.497 0 0 0 0 10.995m106.205 21.128c-14.702 0-26.62-11.915-26.62-26.614c0-14.698 11.918-26.614 26.62-26.614c14.701 0 26.62 11.916 26.62 26.614s-11.919 26.614-26.62 26.614m0-64.22c-18.906 0-34.55 13.947-37.211 32.11h-6.153c-2.685 0-4.864 2.461-4.864 5.496s2.179 5.497 4.864 5.497h6.153c2.66 18.163 18.305 32.11 37.21 32.11C239.159 256 256 239.162 256 218.393c0-20.77-16.842-37.607-37.616-37.607" />
+            </svg>
+            GitHub Actions
+        </li>
+    
+    
+        <li class="ticker__item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 512 512">
+                <path d="M0 0h512v512H0z" fill="none" />
+                <path fill="currentColor"
+                    d="M357.333 402c-16.933-1.555-38.666-4.833-59.67-27.772v47.19c38.587 25.082 104.951 20.478 128.087-9.668c13.75-17.917 19.417-41.917 9.237-69.099C411 294.333 354 291.333 337.424 260.822c-18.313-49.418 57.212-58.347 93.498-25.054v-44.36c-15.46-9.985-40.044-11.058-57.29-10.126c-45.511 2.457-76.094 28.901-75.638 68.293c-1.96 54.987 60.83 69.145 92.359 94.592c21.413 18.17 19.88 62.235-33.02 57.833m-179.691 31.514V220.025h-68.778v-35.303h175.655v35.303h-68.921v213.489zM480 32v448H32V32zm32-32H0v512h512z" />
+            </svg>
+    
+            TypeScript 5.9
+        </li>
+    
+        <li class="ticker__item">
+    
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 128 128">
+                <path d="M0 0h128v128H0z" fill="none" />
+                <g fill="#61dafb">
+                    <circle cx="64" cy="64" r="11.4" />
+                    <path
+                        d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3c.6-2.4 1.1-4.8 1.5-7.1c2.1-13.2-.2-22.5-6.6-26.1c-1.9-1.1-4-1.6-6.4-1.6c-7 0-15.9 5.2-24.9 13.9c-9-8.7-17.9-13.9-24.9-13.9c-2.4 0-4.5.5-6.4 1.6c-6.4 3.7-8.7 13-6.6 26.1c.4 2.3.9 4.7 1.5 7.1c-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3c-.6 2.4-1.1 4.8-1.5 7.1c-2.1 13.2.2 22.5 6.6 26.1c1.9 1.1 4 1.6 6.4 1.6c7.1 0 16-5.2 24.9-13.9c9 8.7 17.9 13.9 24.9 13.9c2.4 0 4.5-.5 6.4-1.6c6.4-3.7 8.7-13 6.6-26.1c-.4-2.3-.9-4.7-1.5-7.1c2.4-.7 4.7-1.4 6.9-2.3c12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8M92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3c-.3 2.1-.8 4.3-1.4 6.6c-5.2-1.2-10.7-2-16.5-2.5c-3.4-4.8-6.9-9.1-10.4-13c7.4-7.3 14.9-12.3 21-12.3c1.3 0 2.5.3 3.5.9M81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6c-3.7.3-7.4.4-11.2.4c-3.9 0-7.6-.1-11.2-.4q-3.3-4.8-6-9.6c-1.9-3.3-3.7-6.7-5.3-10c1.6-3.3 3.4-6.7 5.3-10c1.8-3.2 3.9-6.4 6.1-9.6c3.7-.3 7.4-.4 11.2-.4c3.9 0 7.6.1 11.2.4q3.3 4.8 6 9.6c1.9 3.3 3.7 6.7 5.3 10c-1.7 3.3-3.4 6.6-5.3 10m8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3c-3.4.8-7 1.4-10.8 1.9c1.2-1.9 2.5-3.9 3.6-6c1.2-2.1 2.3-4.2 3.4-6.2M64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3c2.3.1 4.6.2 6.9.2s4.6-.1 6.9-.2c-2.2 2.9-4.5 5.7-6.9 8.3m-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9c1.1-3.3 2.3-6.8 3.8-10.3c1.1 2 2.2 4.1 3.4 6.1c1.2 2.2 2.4 4.1 3.6 6.1m-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3c3.4-.8 7-1.4 10.8-1.9c-1.2 1.9-2.5 3.9-3.6 6c-1.2 2.1-2.3 4.2-3.4 6.2M64 30.2c2.4 2.6 4.7 5.4 6.9 8.3c-2.3-.1-4.6-.2-6.9-.2s-4.6.1-6.9.2c2.2-2.9 4.5-5.7 6.9-8.3m22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9c-1.1 3.3-2.3 6.8-3.8 10.3c-1.1-2.1-2.2-4.2-3.4-6.2M31.7 35c-1.7-10.5-.3-17.9 3.8-20.3c1-.6 2.2-.9 3.5-.9c6 0 13.5 4.9 21 12.3c-3.5 3.8-7 8.2-10.4 13c-5.8.5-11.3 1.4-16.5 2.5c-.6-2.3-1-4.5-1.4-6.6M7 64c0-4.7 5.7-9.7 15.7-13.4c2-.8 4.2-1.5 6.4-2.1c1.6 5 3.6 10.3 6 15.6c-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64m28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3c.3-2.1.8-4.3 1.4-6.6c5.2 1.2 10.7 2 16.5 2.5c3.4 4.8 6.9 9.1 10.4 13c-7.4 7.3-14.9 12.3-21 12.3c-1.3 0-2.5-.3-3.5-.9M96.3 93c1.7 10.5.3 17.9-3.8 20.3c-1 .6-2.2.9-3.5.9c-6 0-13.5-4.9-21-12.3c3.5-3.8 7-8.2 10.4-13c5.8-.5 11.3-1.4 16.5-2.5c.6 2.3 1 4.5 1.4 6.6m9-15.6c-2 .8-4.2 1.5-6.4 2.1c-1.6-5-3.6-10.3-6-15.6c2.4-5.3 4.5-10.5 6-15.5c13.8 4 22.1 10 22.1 15.6c0 4.7-5.8 9.7-15.7 13.4" />
+                </g>
+            </svg>
+    
+    
+            React 19
+        </li>
+    
+    
+    
+        <li class="ticker__item">
+    
+            <svg xmlns="http://www.w3.org/2000/svg" width="4.25em" height="3.9em" viewBox="0 0 640 512">
+                <path d="M0 0h640v512H0z" fill="none" />
+                <path fill="#00b01f"
+                    d="M316.3 452c-2.1 0-4.2-.6-6.1-1.6L291 439c-2.9-1.6-1.5-2.2-.5-2.5c3.8-1.3 4.6-1.6 8.7-4c.4-.2 1-.1 1.4.1l14.8 8.8c.5.3 1.3.3 1.8 0L375 408c.5-.3.9-.9.9-1.6v-66.7c0-.7-.3-1.3-.9-1.6l-57.8-33.3c-.5-.3-1.2-.3-1.8 0l-57.8 33.3c-.6.3-.9 1-.9 1.6v66.7c0 .6.4 1.2.9 1.5l15.8 9.1c8.6 4.3 13.9-.8 13.9-5.8v-65.9c0-.9.7-1.7 1.7-1.7h7.3c.9 0 1.7.7 1.7 1.7v65.9c0 11.5-6.2 18-17.1 18c-3.3 0-6 0-13.3-3.6l-15.2-8.7c-3.7-2.2-6.1-6.2-6.1-10.5v-66.7c0-4.3 2.3-8.4 6.1-10.5l57.8-33.4c3.7-2.1 8.5-2.1 12.1 0l57.8 33.4c3.7 2.2 6.1 6.2 6.1 10.5v66.7c0 4.3-2.3 8.4-6.1 10.5l-57.8 33.4c-1.7 1.1-3.8 1.7-6 1.7m46.7-65.8c0-12.5-8.4-15.8-26.2-18.2c-18-2.4-19.8-3.6-19.8-7.8c0-3.5 1.5-8.1 14.8-8.1c11.9 0 16.3 2.6 18.1 10.6c.2.8.8 1.3 1.6 1.3h7.5c.5 0 .9-.2 1.2-.5c.3-.4.5-.8.4-1.3c-1.2-13.8-10.3-20.2-28.8-20.2c-16.5 0-26.3 7-26.3 18.6c0 12.7 9.8 16.1 25.6 17.7c18.9 1.9 20.4 4.6 20.4 8.3c0 6.5-5.2 9.2-17.4 9.2c-15.3 0-18.7-3.8-19.8-11.4c-.1-.8-.8-1.4-1.7-1.4h-7.5c-.9 0-1.7.7-1.7 1.7c0 9.7 5.3 21.3 30.6 21.3c18.5 0 29-7.2 29-19.8m54.5-50.1c0 6.1-5 11.1-11.1 11.1s-11.1-5-11.1-11.1c0-6.3 5.2-11.1 11.1-11.1c6-.1 11.1 4.8 11.1 11.1m-1.8 0c0-5.2-4.2-9.3-9.4-9.3c-5.1 0-9.3 4.1-9.3 9.3s4.2 9.4 9.3 9.4c5.2-.1 9.4-4.3 9.4-9.4m-4.5 6.2h-2.6c-.1-.6-.5-3.8-.5-3.9c-.2-.7-.4-1.1-1.3-1.1h-2.2v5h-2.4v-12.5h4.3c1.5 0 4.4 0 4.4 3.3c0 2.3-1.5 2.8-2.4 3.1c1.7.1 1.8 1.2 2.1 2.8c.1 1 .3 2.7.6 3.3m-2.8-8.8c0-1.7-1.2-1.7-1.8-1.7h-2v3.5h1.9c1.6 0 1.9-1.1 1.9-1.8M137.3 191c0-2.7-1.4-5.1-3.7-6.4l-61.3-35.3c-1-.6-2.2-.9-3.4-1h-.6c-1.2 0-2.3.4-3.4 1L3.7 184.6C1.4 185.9 0 188.4 0 191l.1 95c0 1.3.7 2.5 1.8 3.2s2.5.7 3.7 0L42 268.3c2.3-1.4 3.7-3.8 3.7-6.4v-44.4c0-2.6 1.4-5.1 3.7-6.4l15.5-8.9c1.2-.7 2.4-1 3.7-1s2.6.3 3.7 1l15.5 8.9c2.3 1.3 3.7 3.8 3.7 6.4v44.4c0 2.6 1.4 5.1 3.7 6.4l36.4 20.9c1.1.7 2.6.7 3.7 0c1.1-.6 1.8-1.9 1.8-3.2zM472.5 87.3v176.4c0 2.6-1.4 5.1-3.7 6.4l-61.3 35.4c-2.3 1.3-5.1 1.3-7.4 0l-61.3-35.4c-2.3-1.3-3.7-3.8-3.7-6.4v-70.8c0-2.6 1.4-5.1 3.7-6.4l61.3-35.4c2.3-1.3 5.1-1.3 7.4 0l15.3 8.8c1.7 1 3.9-.3 3.9-2.2v-94c0-2.8 3-4.6 5.5-3.2l36.5 20.4c2.3 1.2 3.8 3.7 3.8 6.4m-46 128.9c0-.7-.4-1.3-.9-1.6l-21-12.2c-.6-.3-1.3-.3-1.9 0l-21 12.2c-.6.3-.9.9-.9 1.6v24.3c0 .7.4 1.3.9 1.6l21 12.1c.6.3 1.3.3 1.8 0l21-12.1c.6-.3.9-.9.9-1.6v-24.3zm209.8-.7c2.3-1.3 3.7-3.8 3.7-6.4V192c0-2.6-1.4-5.1-3.7-6.4l-60.9-35.4c-2.3-1.3-5.1-1.3-7.4 0l-61.3 35.4c-2.3 1.3-3.7 3.8-3.7 6.4v70.8c0 2.7 1.4 5.1 3.7 6.4l60.9 34.7c2.2 1.3 5 1.3 7.3 0l36.8-20.5c2.5-1.4 2.5-5 0-6.4L550 241.6c-1.2-.7-1.9-1.9-1.9-3.2v-22.2c0-1.3.7-2.5 1.9-3.2l19.2-11.1c1.1-.7 2.6-.7 3.7 0l19.2 11.1c1.1.7 1.9 1.9 1.9 3.2v17.4c0 2.8 3.1 4.6 5.6 3.2zM559 219c-.4.3-.7.7-.7 1.2v13.6c0 .5.3 1 .7 1.2l11.8 6.8c.4.3 1 .3 1.4 0L584 235c.4-.3.7-.7.7-1.2v-13.6c0-.5-.3-1-.7-1.2l-11.8-6.8c-.4-.3-1-.3-1.4 0zm-254.2 43.5v-70.4c0-2.6-1.6-5.1-3.9-6.4l-61.1-35.2c-2.1-1.2-5-1.4-7.4 0l-61.1 35.2c-2.3 1.3-3.9 3.7-3.9 6.4v70.4c0 2.8 1.9 5.2 4 6.4l61.2 35.2c2.4 1.4 5.2 1.3 7.4 0l61-35.2c1.8-1 3.1-2.7 3.6-4.7c.1-.5.2-1.1.2-1.7m-74.3-124.9l-.8.5h1.1zm76.2 130.2l-.4-.7v.9z" />
+            </svg>
+    
+    
+    
+        </li>
+    
+        <li class="ticker__item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 32 32">
+            <path d="M0 0h32v32H0z" fill="none" />
+            <path fill="#a0f"
+                d="M29.313 12h-6.664a1.427 1.427 0 0 1-1.1-2.24l4.398-6.676A.703.703 0 0 0 25.397 2H8.428a.62.62 0 0 0-.55.289l-5.77 8.627A.703.703 0 0 0 2.658 12h8.175a1.427 1.427 0 0 1 1.099 2.24l-4.48 6.676A.702.702 0 0 0 8 22l6.695.002A1.34 1.34 0 0 1 16 23.375v5.934a.652.652 0 0 0 1.168.433l12.694-16.586a.725.725 0 0 0-.55-1.156" />
+        </svg>
+    
+        Vite
+        </li>
+    
+        <li class="ticker__item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2.41m" height="2.1em" viewBox="0 0 128 128">
+            <path d="M0 0h128v128H0z" fill="none" />
+            <path fill="#38bdf8"
+                d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597c6.398-8.531 13.867-11.73 22.398-9.597c4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602q-9.6 12.803-22.399 9.602c-4.87-1.215-8.347-4.746-12.207-8.66c-6.27-6.367-13.53-13.738-29.394-13.738M32.004 64c-17.066 0-27.73 8.531-32 25.602Q9.603 76.799 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66c6.274 6.367 13.536 13.738 29.395 13.738c17.066 0 27.73-8.53 32-25.597q-9.6 12.797-22.399 9.597c-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64m0 0" />
+        </svg>
+        TailwindCSS
+        </li>
+    
+        <li class="ticker__item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 256 256">
+            <path d="M0 0h256v256H0z" fill="none" />
+            <path fill="none" d="M0 0h256v256H0z" />
+            <path fill="none" stroke="#fff" stroke-linecap="round" stroke-width="25" d="m208 128l-80 80m64-168L40 192" />
+        </svg>
+        Shadcn</li>
+    
+        <li class="ticker__item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path fill="currentColor"
+                    d="M12 0c6.627 0 9.166 4.102 9.166 12S18.626 24 12 24s-9.166-4.096-9.166-12c0-7.898 2.54-12 9.166-12m3.031 17.485c-.861 0-1.33.234-1.708.423c-.327.164-.582.292-1.148.292c-.567 0-.822-.128-1.148-.292c-.378-.189-.848-.423-1.71-.423c-.86 0-1.33.234-1.708.423c-.327.164-.581.292-1.148.292v1.251c.862 0 1.331-.234 1.709-.423c.326-.163.581-.292 1.148-.292s.821.129 1.148.292c.378.189.847.423 1.709.423c.861 0 1.33-.234 1.709-.423c.326-.163.58-.292 1.147-.292s.822.129 1.148.292c.378.189.848.423 1.71.423v-1.25c-.565 0-.822-.13-1.149-.293c-.377-.189-.847-.423-1.709-.423m.41-12.536c.65-.586 0-1.648-.813-1.328c-.45.18-.873.438-1.251.779a4.2 4.2 0 0 0-1.202 1.94a4.2 4.2 0 0 0-1.203-1.94a4.3 4.3 0 0 0-1.25-.779c-.814-.32-1.463.742-.814 1.328l2.385 2.153a4.86 4.86 0 0 0-2.731-.839c-.552 0-1.082.09-1.58.26c-.836.284-.604 1.532.275 1.532h3.326a4.2 4.2 0 0 0-2.012.988a4 4 0 0 0-.9 1.165c-.403.776.588 1.529 1.237.948l2.686-2.42l-.2 6.656c0 .08-.047.158-.107.223a5 5 0 0 1-.257-.123c-.378-.189-.848-.423-1.71-.423c-.861 0-1.33.234-1.708.423c-.327.164-.581.292-1.148.292v1.251c.861 0 1.33-.234 1.709-.423c.326-.164.58-.292 1.148-.292c.566 0 .821.128 1.148.292c.377.189.847.423 1.708.423c.862 0 1.332-.234 1.71-.423c.326-.164.58-.292 1.147-.292s.822.128 1.148.292c.378.189.848.423 1.71.423v-1.25c-.565 0-.822-.13-1.149-.293v-.005c-.378-.19-.847-.424-1.709-.424c-.861 0-1.33.235-1.709.424c-.097.045-.189.094-.283.131a.34.34 0 0 1-.12-.232l-.2-6.69l2.722 2.457c.65.587 1.64-.166 1.236-.948a4.11 4.11 0 0 0-2.911-2.153h3.326c.882 0 1.108-1.245.275-1.531a4.88 4.88 0 0 0-4.311.578l2.385-2.152z" />
+            </svg>
+            TanStack Query
+        </li>
+    
+    </ul>
+
+<ul class="ticker__group">
+        <li class="ticker__item"><img class="ticker_featured__img" src="/public/img/GitHub_Lockup_White_Clearspace.svg"></li>
+        <li class="ticker__item"><img class="ticker_featured__img" src="/public/img/GitHub_Copilot_Lockup_White_Clearspace.svg"></li>
+        <li class="ticker__item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 256 256">
+                <path d="M0 0h256v256H0z" fill="none" />
+                <path fill="#4a7ebf"
+                    d="M53.604 0c29.604 0 53.604 23.992 53.604 53.59c0 29.09-23.189 52.75-52.093 53.553c0 2.461.109 7.111 1.501 9.92c1.933 3.893 13.525 11.144 24.892 11.144h4.084c2.567-18.271 18.257-32.332 37.24-32.332c18.906 0 34.55 13.946 37.211 32.11h21.13c2.661-18.164 18.304-32.11 37.21-32.11c20.775 0 37.617 16.837 37.617 37.607s-16.842 37.606-37.617 37.606c-18.906 0-34.55-13.948-37.21-32.11h-21.129c-2.66 18.162-18.305 32.11-37.212 32.11c-18.87 0-34.494-13.893-37.199-32.007l-4.515.135c-7.435-.056-15.29-2.042-21.598-6.328c-1.72-1.169-3.415-2.397-5.182-3.56v2.441c-.01.79-.153 12.657-.164 25.833v2.79c.005 8.641.073 17.545.277 24.04c.446 14.246 12.034 25.745 24.822 28.436c1.663.35 4.52.394 6.321.238c2.571-18.264 18.26-32.32 37.238-32.32c20.774 0 37.616 16.838 37.616 37.607c0 20.77-16.842 37.607-37.616 37.607c-18.769 0-34.323-13.744-37.153-31.714h-3.254c-24.436-1.334-39.628-23.746-39.363-41.923c.334-22.877.082-45.764.079-68.646v-7.565C18.546 101.286 0 79.606 0 53.591C0 23.992 23.999 0 53.604 0m69.228 191.78c-14.701 0-26.62 11.915-26.62 26.613s11.919 26.614 26.62 26.614s26.62-11.915 26.62-26.614c0-14.698-11.918-26.614-26.62-26.614m0-84.912c-14.701 0-26.62 11.915-26.62 26.614c0 14.697 11.919 26.613 26.62 26.613s26.62-11.916 26.62-26.613c0-14.699-11.918-26.614-26.62-26.614m95.551 0c-14.702 0-26.62 11.915-26.62 26.614c0 14.697 11.918 26.613 26.62 26.613s26.621-11.916 26.621-26.613c0-14.699-11.918-26.614-26.62-26.614m15.161 15.408a5.496 5.496 0 0 1 .17 7.606l-.16.168l-16.31 16.345a5.5 5.5 0 0 1-7.576.198l-.172-.163l-7.985-7.86a5.496 5.496 0 0 1-.06-7.773a5.5 5.5 0 0 1 7.606-.22l.168.16l4.092 4.027l12.452-12.477a5.5 5.5 0 0 1 7.775-.01m-95.99-.08a5.497 5.497 0 0 1 .17 7.606l-.16.168l-16.31 16.344a5.5 5.5 0 0 1-7.576.198l-.172-.163l-7.985-7.86a5.498 5.498 0 0 1 7.546-7.992l.168.16l4.093 4.027l12.451-12.478a5.5 5.5 0 0 1 7.775-.01M53.604 10.993c-23.532 0-42.608 19.07-42.608 42.598c0 23.525 19.076 42.597 42.608 42.597s42.608-19.072 42.608-42.597c0-23.527-19.076-42.598-42.608-42.598M49.171 28.13A744 744 0 0 1 75.7 44.841c7.308 4.82 7.29 13.563-.1 18.394a609 609 0 0 1-27.058 16.712c-7.455 4.34-15.8-.65-16.002-9.344c-.13-5.602-.024-11.21-.032-16.817c-.006-5.454-.113-10.911.019-16.363c.222-9.248 8.736-14.066 16.643-9.293m-5.91 8.872v3.868l-.001 5.674l-.001 3.71v5.482c0 4.23.002 8.394.01 12.557c.003 1.96 1.023 1.88 2.343 1.063q11.408-7.071 22.827-14.127c1.258-.776 1.294-1.587.06-2.365c-8.154-5.139-16.318-10.26-25.238-15.862" />
+                <path fill="#85b3df"
+                    d="M133.227 223.88a5.497 5.497 0 1 0 .001-10.996a5.497 5.497 0 0 0 0 10.995m-21.049.001a5.497 5.497 0 1 0 0-10.996a5.497 5.497 0 0 0 0 10.995m106.205 21.128c-14.702 0-26.62-11.915-26.62-26.614c0-14.698 11.918-26.614 26.62-26.614c14.701 0 26.62 11.916 26.62 26.614s-11.919 26.614-26.62 26.614m0-64.22c-18.906 0-34.55 13.947-37.211 32.11h-6.153c-2.685 0-4.864 2.461-4.864 5.496s2.179 5.497 4.864 5.497h6.153c2.66 18.163 18.305 32.11 37.21 32.11C239.159 256 256 239.162 256 218.393c0-20.77-16.842-37.607-37.616-37.607" />
+            </svg>
+            GitHub Actions
+        </li>
+    
+    
+        <li class="ticker__item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 512 512">
+                <path d="M0 0h512v512H0z" fill="none" />
+                <path fill="currentColor"
+                    d="M357.333 402c-16.933-1.555-38.666-4.833-59.67-27.772v47.19c38.587 25.082 104.951 20.478 128.087-9.668c13.75-17.917 19.417-41.917 9.237-69.099C411 294.333 354 291.333 337.424 260.822c-18.313-49.418 57.212-58.347 93.498-25.054v-44.36c-15.46-9.985-40.044-11.058-57.29-10.126c-45.511 2.457-76.094 28.901-75.638 68.293c-1.96 54.987 60.83 69.145 92.359 94.592c21.413 18.17 19.88 62.235-33.02 57.833m-179.691 31.514V220.025h-68.778v-35.303h175.655v35.303h-68.921v213.489zM480 32v448H32V32zm32-32H0v512h512z" />
+            </svg>
+    
+            TypeScript 5.9
+        </li>
+    
+        <li class="ticker__item">
+    
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 128 128">
+                <path d="M0 0h128v128H0z" fill="none" />
+                <g fill="#61dafb">
+                    <circle cx="64" cy="64" r="11.4" />
+                    <path
+                        d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3c.6-2.4 1.1-4.8 1.5-7.1c2.1-13.2-.2-22.5-6.6-26.1c-1.9-1.1-4-1.6-6.4-1.6c-7 0-15.9 5.2-24.9 13.9c-9-8.7-17.9-13.9-24.9-13.9c-2.4 0-4.5.5-6.4 1.6c-6.4 3.7-8.7 13-6.6 26.1c.4 2.3.9 4.7 1.5 7.1c-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3c-.6 2.4-1.1 4.8-1.5 7.1c-2.1 13.2.2 22.5 6.6 26.1c1.9 1.1 4 1.6 6.4 1.6c7.1 0 16-5.2 24.9-13.9c9 8.7 17.9 13.9 24.9 13.9c2.4 0 4.5-.5 6.4-1.6c6.4-3.7 8.7-13 6.6-26.1c-.4-2.3-.9-4.7-1.5-7.1c2.4-.7 4.7-1.4 6.9-2.3c12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8M92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3c-.3 2.1-.8 4.3-1.4 6.6c-5.2-1.2-10.7-2-16.5-2.5c-3.4-4.8-6.9-9.1-10.4-13c7.4-7.3 14.9-12.3 21-12.3c1.3 0 2.5.3 3.5.9M81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6c-3.7.3-7.4.4-11.2.4c-3.9 0-7.6-.1-11.2-.4q-3.3-4.8-6-9.6c-1.9-3.3-3.7-6.7-5.3-10c1.6-3.3 3.4-6.7 5.3-10c1.8-3.2 3.9-6.4 6.1-9.6c3.7-.3 7.4-.4 11.2-.4c3.9 0 7.6.1 11.2.4q3.3 4.8 6 9.6c1.9 3.3 3.7 6.7 5.3 10c-1.7 3.3-3.4 6.6-5.3 10m8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3c-3.4.8-7 1.4-10.8 1.9c1.2-1.9 2.5-3.9 3.6-6c1.2-2.1 2.3-4.2 3.4-6.2M64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3c2.3.1 4.6.2 6.9.2s4.6-.1 6.9-.2c-2.2 2.9-4.5 5.7-6.9 8.3m-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9c1.1-3.3 2.3-6.8 3.8-10.3c1.1 2 2.2 4.1 3.4 6.1c1.2 2.2 2.4 4.1 3.6 6.1m-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3c3.4-.8 7-1.4 10.8-1.9c-1.2 1.9-2.5 3.9-3.6 6c-1.2 2.1-2.3 4.2-3.4 6.2M64 30.2c2.4 2.6 4.7 5.4 6.9 8.3c-2.3-.1-4.6-.2-6.9-.2s-4.6.1-6.9.2c2.2-2.9 4.5-5.7 6.9-8.3m22.2 21l-3.6-6c3.8.5 7.4 1.1 10.8 1.9c-1.1 3.3-2.3 6.8-3.8 10.3c-1.1-2.1-2.2-4.2-3.4-6.2M31.7 35c-1.7-10.5-.3-17.9 3.8-20.3c1-.6 2.2-.9 3.5-.9c6 0 13.5 4.9 21 12.3c-3.5 3.8-7 8.2-10.4 13c-5.8.5-11.3 1.4-16.5 2.5c-.6-2.3-1-4.5-1.4-6.6M7 64c0-4.7 5.7-9.7 15.7-13.4c2-.8 4.2-1.5 6.4-2.1c1.6 5 3.6 10.3 6 15.6c-2.4 5.3-4.5 10.5-6 15.5C15.3 75.6 7 69.6 7 64m28.5 49.3c-4.1-2.4-5.5-9.8-3.8-20.3c.3-2.1.8-4.3 1.4-6.6c5.2 1.2 10.7 2 16.5 2.5c3.4 4.8 6.9 9.1 10.4 13c-7.4 7.3-14.9 12.3-21 12.3c-1.3 0-2.5-.3-3.5-.9M96.3 93c1.7 10.5.3 17.9-3.8 20.3c-1 .6-2.2.9-3.5.9c-6 0-13.5-4.9-21-12.3c3.5-3.8 7-8.2 10.4-13c5.8-.5 11.3-1.4 16.5-2.5c.6 2.3 1 4.5 1.4 6.6m9-15.6c-2 .8-4.2 1.5-6.4 2.1c-1.6-5-3.6-10.3-6-15.6c2.4-5.3 4.5-10.5 6-15.5c13.8 4 22.1 10 22.1 15.6c0 4.7-5.8 9.7-15.7 13.4" />
+                </g>
+            </svg>
+    
+    
+            React 19
+        </li>
+    
+    
+    
+        <li class="ticker__item">
+    
+            <svg xmlns="http://www.w3.org/2000/svg" width="4.25em" height="3.9em" viewBox="0 0 640 512">
+                <path d="M0 0h640v512H0z" fill="none" />
+                <path fill="#00b01f"
+                    d="M316.3 452c-2.1 0-4.2-.6-6.1-1.6L291 439c-2.9-1.6-1.5-2.2-.5-2.5c3.8-1.3 4.6-1.6 8.7-4c.4-.2 1-.1 1.4.1l14.8 8.8c.5.3 1.3.3 1.8 0L375 408c.5-.3.9-.9.9-1.6v-66.7c0-.7-.3-1.3-.9-1.6l-57.8-33.3c-.5-.3-1.2-.3-1.8 0l-57.8 33.3c-.6.3-.9 1-.9 1.6v66.7c0 .6.4 1.2.9 1.5l15.8 9.1c8.6 4.3 13.9-.8 13.9-5.8v-65.9c0-.9.7-1.7 1.7-1.7h7.3c.9 0 1.7.7 1.7 1.7v65.9c0 11.5-6.2 18-17.1 18c-3.3 0-6 0-13.3-3.6l-15.2-8.7c-3.7-2.2-6.1-6.2-6.1-10.5v-66.7c0-4.3 2.3-8.4 6.1-10.5l57.8-33.4c3.7-2.1 8.5-2.1 12.1 0l57.8 33.4c3.7 2.2 6.1 6.2 6.1 10.5v66.7c0 4.3-2.3 8.4-6.1 10.5l-57.8 33.4c-1.7 1.1-3.8 1.7-6 1.7m46.7-65.8c0-12.5-8.4-15.8-26.2-18.2c-18-2.4-19.8-3.6-19.8-7.8c0-3.5 1.5-8.1 14.8-8.1c11.9 0 16.3 2.6 18.1 10.6c.2.8.8 1.3 1.6 1.3h7.5c.5 0 .9-.2 1.2-.5c.3-.4.5-.8.4-1.3c-1.2-13.8-10.3-20.2-28.8-20.2c-16.5 0-26.3 7-26.3 18.6c0 12.7 9.8 16.1 25.6 17.7c18.9 1.9 20.4 4.6 20.4 8.3c0 6.5-5.2 9.2-17.4 9.2c-15.3 0-18.7-3.8-19.8-11.4c-.1-.8-.8-1.4-1.7-1.4h-7.5c-.9 0-1.7.7-1.7 1.7c0 9.7 5.3 21.3 30.6 21.3c18.5 0 29-7.2 29-19.8m54.5-50.1c0 6.1-5 11.1-11.1 11.1s-11.1-5-11.1-11.1c0-6.3 5.2-11.1 11.1-11.1c6-.1 11.1 4.8 11.1 11.1m-1.8 0c0-5.2-4.2-9.3-9.4-9.3c-5.1 0-9.3 4.1-9.3 9.3s4.2 9.4 9.3 9.4c5.2-.1 9.4-4.3 9.4-9.4m-4.5 6.2h-2.6c-.1-.6-.5-3.8-.5-3.9c-.2-.7-.4-1.1-1.3-1.1h-2.2v5h-2.4v-12.5h4.3c1.5 0 4.4 0 4.4 3.3c0 2.3-1.5 2.8-2.4 3.1c1.7.1 1.8 1.2 2.1 2.8c.1 1 .3 2.7.6 3.3m-2.8-8.8c0-1.7-1.2-1.7-1.8-1.7h-2v3.5h1.9c1.6 0 1.9-1.1 1.9-1.8M137.3 191c0-2.7-1.4-5.1-3.7-6.4l-61.3-35.3c-1-.6-2.2-.9-3.4-1h-.6c-1.2 0-2.3.4-3.4 1L3.7 184.6C1.4 185.9 0 188.4 0 191l.1 95c0 1.3.7 2.5 1.8 3.2s2.5.7 3.7 0L42 268.3c2.3-1.4 3.7-3.8 3.7-6.4v-44.4c0-2.6 1.4-5.1 3.7-6.4l15.5-8.9c1.2-.7 2.4-1 3.7-1s2.6.3 3.7 1l15.5 8.9c2.3 1.3 3.7 3.8 3.7 6.4v44.4c0 2.6 1.4 5.1 3.7 6.4l36.4 20.9c1.1.7 2.6.7 3.7 0c1.1-.6 1.8-1.9 1.8-3.2zM472.5 87.3v176.4c0 2.6-1.4 5.1-3.7 6.4l-61.3 35.4c-2.3 1.3-5.1 1.3-7.4 0l-61.3-35.4c-2.3-1.3-3.7-3.8-3.7-6.4v-70.8c0-2.6 1.4-5.1 3.7-6.4l61.3-35.4c2.3-1.3 5.1-1.3 7.4 0l15.3 8.8c1.7 1 3.9-.3 3.9-2.2v-94c0-2.8 3-4.6 5.5-3.2l36.5 20.4c2.3 1.2 3.8 3.7 3.8 6.4m-46 128.9c0-.7-.4-1.3-.9-1.6l-21-12.2c-.6-.3-1.3-.3-1.9 0l-21 12.2c-.6.3-.9.9-.9 1.6v24.3c0 .7.4 1.3.9 1.6l21 12.1c.6.3 1.3.3 1.8 0l21-12.1c.6-.3.9-.9.9-1.6v-24.3zm209.8-.7c2.3-1.3 3.7-3.8 3.7-6.4V192c0-2.6-1.4-5.1-3.7-6.4l-60.9-35.4c-2.3-1.3-5.1-1.3-7.4 0l-61.3 35.4c-2.3 1.3-3.7 3.8-3.7 6.4v70.8c0 2.7 1.4 5.1 3.7 6.4l60.9 34.7c2.2 1.3 5 1.3 7.3 0l36.8-20.5c2.5-1.4 2.5-5 0-6.4L550 241.6c-1.2-.7-1.9-1.9-1.9-3.2v-22.2c0-1.3.7-2.5 1.9-3.2l19.2-11.1c1.1-.7 2.6-.7 3.7 0l19.2 11.1c1.1.7 1.9 1.9 1.9 3.2v17.4c0 2.8 3.1 4.6 5.6 3.2zM559 219c-.4.3-.7.7-.7 1.2v13.6c0 .5.3 1 .7 1.2l11.8 6.8c.4.3 1 .3 1.4 0L584 235c.4-.3.7-.7.7-1.2v-13.6c0-.5-.3-1-.7-1.2l-11.8-6.8c-.4-.3-1-.3-1.4 0zm-254.2 43.5v-70.4c0-2.6-1.6-5.1-3.9-6.4l-61.1-35.2c-2.1-1.2-5-1.4-7.4 0l-61.1 35.2c-2.3 1.3-3.9 3.7-3.9 6.4v70.4c0 2.8 1.9 5.2 4 6.4l61.2 35.2c2.4 1.4 5.2 1.3 7.4 0l61-35.2c1.8-1 3.1-2.7 3.6-4.7c.1-.5.2-1.1.2-1.7m-74.3-124.9l-.8.5h1.1zm76.2 130.2l-.4-.7v.9z" />
+            </svg>
+    
+    
+    
+        </li>
+    
+        <li class="ticker__item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 32 32">
+            <path d="M0 0h32v32H0z" fill="none" />
+            <path fill="#a0f"
+                d="M29.313 12h-6.664a1.427 1.427 0 0 1-1.1-2.24l4.398-6.676A.703.703 0 0 0 25.397 2H8.428a.62.62 0 0 0-.55.289l-5.77 8.627A.703.703 0 0 0 2.658 12h8.175a1.427 1.427 0 0 1 1.099 2.24l-4.48 6.676A.702.702 0 0 0 8 22l6.695.002A1.34 1.34 0 0 1 16 23.375v5.934a.652.652 0 0 0 1.168.433l12.694-16.586a.725.725 0 0 0-.55-1.156" />
+        </svg>
+    
+        Vite
+        </li>
+    
+        <li class="ticker__item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 128 128">
+            <path d="M0 0h128v128H0z" fill="none" />
+            <path fill="#38bdf8"
+                d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597c6.398-8.531 13.867-11.73 22.398-9.597c4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602q-9.6 12.803-22.399 9.602c-4.87-1.215-8.347-4.746-12.207-8.66c-6.27-6.367-13.53-13.738-29.394-13.738M32.004 64c-17.066 0-27.73 8.531-32 25.602Q9.603 76.799 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66c6.274 6.367 13.536 13.738 29.395 13.738c17.066 0 27.73-8.53 32-25.597q-9.6 12.797-22.399 9.597c-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64m0 0" />
+        </svg>
+        TailwindCSS
+        </li>
+    
+        <li class="ticker__item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="2.1em" height="2.1em" viewBox="0 0 256 256">
+            <path d="M0 0h256v256H0z" fill="none" />
+            <path fill="none" d="M0 0h256v256H0z" />
+            <path fill="none" stroke="#fff" stroke-linecap="round" stroke-width="25" d="m208 128l-80 80m64-168L40 192" />
+        </svg>
+        Shadcn</li>
+    
+        <li class="ticker__item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24em" height="2.4em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path fill="currentColor"
+                    d="M12 0c6.627 0 9.166 4.102 9.166 12S18.626 24 12 24s-9.166-4.096-9.166-12c0-7.898 2.54-12 9.166-12m3.031 17.485c-.861 0-1.33.234-1.708.423c-.327.164-.582.292-1.148.292c-.567 0-.822-.128-1.148-.292c-.378-.189-.848-.423-1.71-.423c-.86 0-1.33.234-1.708.423c-.327.164-.581.292-1.148.292v1.251c.862 0 1.331-.234 1.709-.423c.326-.163.581-.292 1.148-.292s.821.129 1.148.292c.378.189.847.423 1.709.423c.861 0 1.33-.234 1.709-.423c.326-.163.58-.292 1.147-.292s.822.129 1.148.292c.378.189.848.423 1.71.423v-1.25c-.565 0-.822-.13-1.149-.293c-.377-.189-.847-.423-1.709-.423m.41-12.536c.65-.586 0-1.648-.813-1.328c-.45.18-.873.438-1.251.779a4.2 4.2 0 0 0-1.202 1.94a4.2 4.2 0 0 0-1.203-1.94a4.3 4.3 0 0 0-1.25-.779c-.814-.32-1.463.742-.814 1.328l2.385 2.153a4.86 4.86 0 0 0-2.731-.839c-.552 0-1.082.09-1.58.26c-.836.284-.604 1.532.275 1.532h3.326a4.2 4.2 0 0 0-2.012.988a4 4 0 0 0-.9 1.165c-.403.776.588 1.529 1.237.948l2.686-2.42l-.2 6.656c0 .08-.047.158-.107.223a5 5 0 0 1-.257-.123c-.378-.189-.848-.423-1.71-.423c-.861 0-1.33.234-1.708.423c-.327.164-.581.292-1.148.292v1.251c.861 0 1.33-.234 1.709-.423c.326-.164.58-.292 1.148-.292c.566 0 .821.128 1.148.292c.377.189.847.423 1.708.423c.862 0 1.332-.234 1.71-.423c.326-.164.58-.292 1.147-.292s.822.128 1.148.292c.378.189.848.423 1.71.423v-1.25c-.565 0-.822-.13-1.149-.293v-.005c-.378-.19-.847-.424-1.709-.424c-.861 0-1.33.235-1.709.424c-.097.045-.189.094-.283.131a.34.34 0 0 1-.12-.232l-.2-6.69l2.722 2.457c.65.587 1.64-.166 1.236-.948a4.11 4.11 0 0 0-2.911-2.153h3.326c.882 0 1.108-1.245.275-1.531a4.88 4.88 0 0 0-4.311.578l2.385-2.152z" />
+            </svg>
+            TanStack Query
+        </li>
+    
+    </ul>
+    </div>
+  </section>
+
+        <section class="section">
+            <div class="wrap maintainer">
+                <div class="maintainer-label">
+                        <img src="/public/img/octotriage-logo.svg" alt="octoTriage">
+                    <div class="mono">A NOTE FROM<br>THE BUILDERS</div>
+                </div>
+                <div>
+                    <blockquote>“ The amount of content is growing, the context is expanding, and the number of task switches is
+                        increasing.
+                
+                        Maintaining 20 repos shouldn’t mean keeping 20 tabs open just to figure out who’s
+                        waiting on you.”</blockquote>
+                
+                    <p>It’s a community project Not affiliated by GitHub but Github-compatible and buit to use Github. Use it to clear
+                        your backlog, help improve a
+                        rough edge, or just show us a better way.</p>
+                
+                    <p>We built OctoTriage because we wanted a quieter place to
+                        catch up, review a contribution, and move things forward.</p>
+                    <p>We’re glad you’re here.</p>
+                
+                    <p style="color:var(--accent);font-size:12px">Free for open-source maintainers. Built with them,
+                        too.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="wrap footer-inner">
+            <div class="footer-brand">
+                <img src="/public/img/octotriage-logo.svg" alt="octoTriage">
+                <span>© 2026 · OctoTriage. </span>
+        
+            </div>
+            <div class="footer-links"><a data-repo href="https://github.com/Logic-HQ/OctoTriage">GitHub ↗</a>
+                <a data-docs href="https://github.com/Logic-HQ/OctoTriage/wiki/Quick-Start">Documentation ↗</a>
+                <a href="https://github.com/Logic-HQ/OctoTriage/blob/main/docs/SECURITY.md">Privacy</a>
+                <a href="https://github.com/Logic-HQ/OctoTriage/blob/main/docs/CONTRIBUTING.md">Contribute</a>
+            </div>
+            <span>Built for open-source maintainers.</span>
         </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- CTA -->
-  <section id="get-started" class="border-t border-white/10 bg-slate-900/40 py-20">
-    <div class="mx-auto max-w-4xl px-6 text-center">
-      <h2 class="text-3xl font-bold tracking-tight md:text-5xl">Clear your maintainer backlog today</h2>
-      <p class="mx-auto mt-4 max-w-xl text-slate-300">
-        Turn a scattered stream of GitHub activity into a focused, actionable triage board.
-      </p>
-      <a
-        href="https://github.com/Logic-HQ/OctoTriage"
-        class="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-8 py-4 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400"
-      >
-        Connect GitHub and start triaging
-      </a>
-      <p class="mt-4 text-sm text-slate-400">Free for open-source maintainers.</p>
-    </div>
-  </section>
+    <script type="module" async="" src="/public/ot-m-script.js" crossorigin="anonymous" nonce=""></script>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/10 py-10">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-400 md:flex-row">
-      <p>© 2026 OctoTriage. Built for open-source maintainers.</p>
-      <div class="flex gap-6">
-        <a href="https://github.com/Logic-HQ/OctoTriage" class="hover:text-white">GitHub</a>
-        <a href="https://github.com/Logic-HQ/OctoTriage/wiki" class="hover:text-white">Documentation</a>
-        <a href="https://logic-hq.github.io/octo-triage/#privacy" class="hover:text-white">Privacy</a>
-        <a href="https://github.com/Logic-HQ/OctoTriage/discussions" class="hover:text-white">Contact</a>
-      </div>
-    </div>
-  </footer>
+    <script>
+ </script>
 </body>
+
 </html>
